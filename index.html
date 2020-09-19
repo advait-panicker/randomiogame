@@ -4,9 +4,21 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>tdsjs</title>
+        <style>
+            * {
+                -webkit-touch-callout: none; /* iOS Safari */
+                -webkit-user-select: none; /* Safari */
+                -khtml-user-select: none; /* Konqueror HTML */
+                -moz-user-select: none; /* Firefox */
+                -ms-user-select: none; /* Internet Explorer/Edge */
+                user-select: none; /* Non-prefixed version, currently                                supported by Chrome and Opera */
+            }
+        </style>
     </head>
     <script src="p5.js"></script>
     <script src="res.js"></script>
     <script src="program.js"></script>
     <script src="controls.js"></script>
+    <h1 unselectable="on">Wood: <span id="woodcnt"></span></h1>
+    <h1 unselectable="on">Stone: <span id="stonecnt"></span></h1>
 </html>
