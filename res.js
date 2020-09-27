@@ -11,9 +11,9 @@ class Resource {
         this.res = 20;
     }
     display () {
-        const x = map(this.pos.x, pos.x-fov, pos.x+fov, 0, width);
-        const y = map(this.pos.y, pos.y-fov, pos.y+fov, 0, height);
-        image(sprites[this.type], x, y, scl/fov*4, scl/fov*4);
+        const x = map(this.pos.x, pos.x-fovx, pos.x+fovx, 0, width);
+        const y = map(this.pos.y, pos.y-fovy, pos.y+fovy, 0, height);
+        image(sprites[this.type], x, y, scl/fovy*4, scl/fovy*4);
         text(this.res, x, y);
     }
     hit() {

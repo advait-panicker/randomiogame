@@ -12,6 +12,10 @@
                 -moz-user-select: none; /* Firefox */
                 -ms-user-select: none; /* Internet Explorer/Edge */
                 user-select: none; /* Non-prefixed version, currently                                supported by Chrome and Opera */
+                border : 0;
+                padding : 0;
+                margin : 0;
+                overflow: hidden;
             }
         </style>
     </head>
@@ -19,6 +23,8 @@
     <script src="res.js"></script>
     <script src="program.js"></script>
     <script src="controls.js"></script>
-    <h1 unselectable="on">Wood: <span id="woodcnt"></span></h1>
-    <h1 unselectable="on">Stone: <span id="stonecnt"></span></h1>
+    <!-- <div id="overlay">
+        <h1 unselectable="on">Wood: <span id="woodcnt"></span></h1>
+        <h1 unselectable="on">Stone: <span id="stonecnt"></span></h1>
+    </div> -->
 </html>

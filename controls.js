@@ -16,4 +16,4 @@ function keyPress(keyCode, onoff) {
 }
 document.addEventListener('keydown', key => keyPress(key.keyCode, true), false);
 document.addEventListener('keyup', key => keyPress(key.keyCode, false), false);
-document.addEventListener('wheel', zoom => fov += zoom.wheelDelta > 0 ? -1 : 1 , false);
+document.addEventListener('wheel', scroll => {zoom += scroll.wheelDelta > 0 ? -0.01 : 0.01; resetZoom()}, false);
