@@ -5,7 +5,7 @@ let fov = 100;
 let up = false, down = false, left = false, right = false;
 const scl = 2000;
 let inv = {wood : 0, stone : 0};
-let dir;
+let gameMessages = [];
 function preload() {
     for (let a in res) {
         sprites[a] = loadImage(`sprites/${a.slice(0, -1)}.png`);
@@ -23,32 +23,50 @@ function setup() {
     requestPointerLock();
 }
 function draw() {
+    // Player
     background(0);
     stroke(0);
     ellipse(width/2, height/2, scl/fov, scl/fov);
-    dir = createVector(mouseX-width/2, mouseY-height/2);
-    dir.normalize().mult(10);
-    stroke(255, 0, 0);
-    line(width/2, height/2, width/2+dir.x, height/2+dir.y);
+    noStroke();
+    fill(255);
+    // Game world updates
     for (type in res) {
-        res[type].forEach(obj => obj.display());
+        res[type].forEach(obj => {
+            obj.display();
+            if (frameCount % 600 == 0) {
+                obj.update();
+            }
+        });
     }
+    // Game Messages
+    gameMessages.forEach((v, i) => {
+        if (v.time > 0) {
+            text(v.msg, width/2, 10);
+            if (frameCount % 60 == 0) {
+                v.time--;
+            }
+        } else {
+            gameMessages.pop();
+        }
+    });
+    // Controls + inv
     pos.add(right - left, down - up);
     document.getElementById('woodcnt').innerText = inv.wood;
     document.getElementById('stonecnt').innerText = inv.stone;
 }
 function mouseClicked() {
-    const x = map(mouseX, 0, width, pos.x-fov, pos.x+fov);
-    const y = map(mouseY, 0, height, pos.y-fov, pos.y+fov);
-    let msp = createVector(x, y);
+    const x = map(mouseX, 0,  width, -fov, fov);
+    const y = map(mouseY, 0, height, -fov, fov);
+    const msp = createVector(x, y).normalize().mult(10).add(pos);
     for (type in res) {
         res[type].forEach(obj => {
             if (p5.Vector.sub(msp, obj.pos).mag() < 10) {
-                if (p5.Vector.sub(obj.pos, pos).mag() < 15) {
-                    console.log('hit');
-                    inv[outputs[obj.type]]++;
-                }
+                inv[outputs[obj.type]]++;
+                obj.hit();
             }
         });
     }
+}
+function gameMessage(msg) {
+    gameMessages.unshift({msg: msg, time: 3});
 }
